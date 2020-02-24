@@ -35,17 +35,16 @@ public class BallIn extends CommandBase {
   public void initialize() {
   }
 
-  public double getIntakeStatus() {
-    int rightTrigger = Constants.RIGHT_TRIGGER;
-    return m_xboxController.getRawAxis(rightTrigger);
-  }
+  
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
-    double triggerValue = getIntakeStatus();
+  public void execute() { 
+    double triggerValue = m_xboxController.getRawAxis(Constants.RIGHT_TRIGGER);
+    System.out.println("Trigger value: " + triggerValue);
     if (triggerValue>0) {
       m_Intake.intakeOn();
+      System.out.println("Trigger value: " + triggerValue);
     }
     else {
       m_Intake.intakeOff();

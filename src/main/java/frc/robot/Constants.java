@@ -6,7 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot;
-
+//import edu.wpi.first.wpilibj.Solenoid;
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants.  This class should not be used for any other purpose.  All constants should be
@@ -27,15 +27,20 @@ public final class  Constants {
     public static final int WINCH_HOOK_VICTOR = 5;
 
     public static final int SHOOTER_TALON = 6;
+    public static final double SHOOTER_SPEED = 0.5;
 
     public static final int INTAKE_TALON = 7;
-    public static final double INTAKE_SPEED = 0;
+    public static final double INTAKE_SPEED = -0.75;
 
     public static final int WINCH_LIFT_VICTOR = 8;
+
+    public static final int SHOOTER_PISTON = 0;
 
     public static final int DRIVER_CONTROLLER = 0;
     public static final int SHOOTER_CONTROLLER = 1;
     public static final int LEFT_STICK_Y = 1;
     public static final int RIGHT_STICK_Y = 5;
     public static final int RIGHT_TRIGGER = 3;
+    public static final int X_BUTTON = 3;
+    public static final int RIGHT_BUMPER = 5;
 }

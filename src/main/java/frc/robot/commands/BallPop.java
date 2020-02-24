@@ -7,39 +7,42 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
-import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.PopUpPistion;
+//import edu.wpi.first.wpilibj.XboxController;
 
-public class DriveCommand extends CommandBase {
+public class BallPop extends CommandBase {
+  private final PopUpPistion m_popUpPiston;
+  private long startTime;
+  private boolean Finished;
+  //private final XboxController m_xboxController;
 
-  private final DriveTrain m_driveTrain;
-  private final XboxController m_xboxController;
+
   /**
-   * Creates a new DriveCommmand.
+   * Creates a new BallPop.
    */
-  public DriveCommand(DriveTrain subsystem, XboxController xboxController) {
+  public BallPop(PopUpPistion subsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
-    m_driveTrain = subsystem;
-    m_xboxController = xboxController;
-    addRequirements(m_driveTrain);
+    m_popUpPiston = subsystem;
+    //m_xboxController = xboxController;
+    addRequirements(m_popUpPiston);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    
+    startTime = System.currentTimeMillis();
+    m_popUpPiston.pistonUp();
+    Finished = false;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double leftStickY = m_xboxController.getRawAxis(Constants.LEFT_STICK_Y);
-    double rightStickY = m_xboxController.getRawAxis(Constants.RIGHT_STICK_Y);
-
-    m_driveTrain.setLeftMotor(leftStickY*Constants.ROBOT_SPEED);
-    m_driveTrain.setRightMotor(rightStickY*Constants.ROBOT_SPEED);
+    if (startTime+300<System.currentTimeMillis()){
+      m_popUpPiston.pistonDown();
+      Finished = true;
+    }
   }
 
   // Called once the command ends or is interrupted.
@@ -50,6 +53,6 @@ public class DriveCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return Finished;
   }
 }

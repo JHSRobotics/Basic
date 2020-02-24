@@ -10,6 +10,7 @@ package frc.robot;
 //import java.sql.DriverAction;
 
 import edu.wpi.first.wpilibj.GenericHID;
+//import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.subsystems.*;
 //import edu.wpi.first.wpilibj.XboxController;
@@ -19,6 +20,7 @@ import frc.robot.commands.*;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 //import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -36,6 +38,10 @@ public class RobotContainer {
   private final DriveCommand m_driveCommand = new DriveCommand(m_driveTrain, m_xboxController);
   private final Intake m_Intake = new Intake();
   private final BallIn m_BallIn = new BallIn(m_Intake, m_xboxController);
+  private final PopUpPistion m_PopUpPistion = new PopUpPistion();
+  private final BallPop m_BallPop = new BallPop(m_PopUpPistion);
+  private final WheelShooter m_WheelShooter = new WheelShooter();
+  private final BallShoot m_BallShoot = new BallShoot(m_WheelShooter, m_xboxController);
   
 
   /**
@@ -58,7 +64,12 @@ public class RobotContainer {
     //final JoystickButton IntakeButton;
 
     //IntakeButton = new JoystickButton(m_xboxC)    
-
+    final JoystickButton XButton;
+    final JoystickButton RightBumper;
+    XButton = new JoystickButton(m_xboxController, Constants.X_BUTTON);
+    RightBumper= new JoystickButton(m_xboxController, Constants.RIGHT_BUMPER);
+    XButton.whenPressed(m_BallPop);
+    RightBumper.whenPressed(m_BallShoot);
   }
 
 

@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.Victor;
+//import edu.wpi.first.wpilibj.XboxController;
 //import edu.wpi.first.wpilibj.Talon;
 
 public class DriveTrain extends SubsystemBase {
@@ -20,26 +21,32 @@ public class DriveTrain extends SubsystemBase {
   private Victor rightDriveVictor2;
   private Victor leftDriveVictor1;
   private Victor leftDriveVictor2;
-
+  //private XboxController m_xboxController;
 
   public DriveTrain() {    
     rightDriveVictor1 = new Victor(Constants.RIGHT_DRIVE_VICTOR_1);
     rightDriveVictor2 = new Victor(Constants.RIGHT_DRIVE_VICTOR_2);
     leftDriveVictor1 = new Victor(Constants.LEFT_DRIVE_VICTOR_1);
     leftDriveVictor2 = new Victor(Constants.LEFT_DRIVE_VICTOR_2);
-  }
-
-  public void setLeftMotor(double speed){
-    //***Might want to set inverted instead
-    rightDriveVictor1.set(-speed);
-    rightDriveVictor2.set(-speed);
+    //m_xboxController = new XboxController(Constants.DRIVER_CONTROLLER);
   }
 
   public void setRightMotor(double speed){
-    leftDriveVictor1.set(speed);
-    leftDriveVictor2.set(speed);
+    //***Might want to set inverted instead
+    rightDriveVictor1.set(speed);
+    rightDriveVictor2.set(speed);
+  }
+
+  public void setLeftMotor(double speed){
+    leftDriveVictor1.set(-speed);
+    leftDriveVictor2.set(-speed);
     //System.out.println("SET RIGHT");
   }
+/*
+  public double GetDriverRawAxis(int axis){
+    return m_xboxController.getRawAxis(axis);
+  }
+*/
 
   @Override
   public void periodic() {

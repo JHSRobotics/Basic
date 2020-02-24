@@ -7,28 +7,28 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj.Solenoid;
 import frc.robot.Constants;
-//import edu.wpi.first.wpilibj.XboxController;
 
-public class Intake extends SubsystemBase {
+public class PopUpPistion extends SubsystemBase {
   
-  private Talon intakeMotor;
-  //private XboxController xboxController;
-
+  private Solenoid popPiston;
   /**
-   * Creates a new Intake.
+   * Creates a new PopUpPistion.
    */
-  public Intake() {
-    intakeMotor = new Talon(Constants.INTAKE_TALON);
+  public PopUpPistion() {
+    popPiston = new Solenoid(Constants.SHOOTER_PISTON);
   }
 
-  public void intakeOn() {
-    intakeMotor.set(Constants.INTAKE_SPEED);
+  public void pistonUp() {
+    popPiston.set(true);
+    //System.out.println("Piston Up");
   }
-  public void intakeOff() {
-    intakeMotor.set(0);
+
+  public void pistonDown() {
+    popPiston.set(false);
+    //System.out.println("Piston Down");
   }
 
   @Override
