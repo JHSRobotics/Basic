@@ -32,7 +32,7 @@ public class BallPop extends CommandBase {
   @Override
   public void initialize() {
     startTime = System.currentTimeMillis();
-    m_popUpPiston.pistonUp();
+    m_popUpPiston.pistonDown();
     Finished = false;
   }
 
@@ -40,7 +40,7 @@ public class BallPop extends CommandBase {
   @Override
   public void execute() {
     if (startTime+300<System.currentTimeMillis()){
-      m_popUpPiston.pistonDown();
+      m_popUpPiston.pistonUp();
       Finished = true;
     }
   }

@@ -40,16 +40,20 @@ public class BallIn extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() { 
-    double triggerValue = m_xboxController.getRawAxis(Constants.RIGHT_TRIGGER);
-    System.out.println("Trigger value: " + triggerValue);
-    if (triggerValue>0) {
-      m_Intake.intakeOn();
-      System.out.println("Trigger value: " + triggerValue);
+    double rTriggerValue = m_xboxController.getRawAxis(Constants.RIGHT_TRIGGER);
+    double lTriggerValue = m_xboxController.getRawAxis(Constants.LEFT_TRIGGER);
+    //System.out.println("Trigger value: " + rTriggerValue);
+    if (rTriggerValue>0) {
+      m_Intake.setIntake(rTriggerValue);
+      //System.out.println("Right trigger value: " + rTriggerValue);
+    }
+    else if (lTriggerValue>0) {
+      m_Intake.setIntake(-lTriggerValue);
+      //System.out.println("Left trigger value: " + lTriggerValue);
     }
     else {
       m_Intake.intakeOff();
     }
-    
   }
 
   // Called once the command ends or is interrupted.

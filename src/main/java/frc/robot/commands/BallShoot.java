@@ -9,20 +9,20 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.WheelShooter;
-import edu.wpi.first.wpilibj.XboxController;;
+//import edu.wpi.first.wpilibj.XboxController;;
 
 public class BallShoot extends CommandBase {
   
   private final WheelShooter m_WheelShooter;
-  private final XboxController m_xboxController;
+  //private final XboxController m_xboxController;
   
   /**
    * Creates a new BallShoot.
    */
-  public BallShoot(WheelShooter subsystem, XboxController xboxController) {
+  public BallShoot(WheelShooter subsystem /*,XboxController xboxController*/) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_WheelShooter = subsystem;
-    m_xboxController = xboxController;
+    //m_xboxController = xboxController;
     addRequirements(m_WheelShooter);
   }
 
@@ -54,6 +54,6 @@ public class BallShoot extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 }

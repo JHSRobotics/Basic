@@ -24,8 +24,8 @@ public class Intake extends SubsystemBase {
     intakeMotor = new Talon(Constants.INTAKE_TALON);
   }
 
-  public void intakeOn() {
-    intakeMotor.set(Constants.INTAKE_SPEED);
+  public void setIntake(double speed) {
+    intakeMotor.set(speed);
   }
   public void intakeOff() {
     intakeMotor.set(0);
@@ -34,5 +34,6 @@ public class Intake extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+
   }
 }

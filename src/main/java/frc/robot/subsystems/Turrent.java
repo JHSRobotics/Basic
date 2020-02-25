@@ -7,14 +7,31 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 public class Turrent extends SubsystemBase {
+  
+  private Victor turrentVictor;
+  
   /**
    * Creates a new Turrent.
    */
   public Turrent() {
+    turrentVictor = new Victor(Constants.TURRET_VICTOR);
+  }
 
+  public void rotateRight() {
+    turrentVictor.set(-Constants.TURRENT_SPEED);
+  }
+
+  public void rotateLeft() {
+    turrentVictor.set(Constants.TURRENT_SPEED);
+  }
+
+  public void STOP() {
+    turrentVictor.set(0);
   }
 
   @Override

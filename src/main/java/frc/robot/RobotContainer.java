@@ -32,16 +32,20 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   //private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
 
-  private final XboxController m_xboxController = new XboxController(Constants.DRIVER_CONTROLLER);
+  private final XboxController m_driveController = new XboxController(Constants.DRIVER_CONTROLLER);
   private final DriveTrain m_driveTrain = new DriveTrain();
   private final Command m_autoCommand = new AutoCommand();
-  private final DriveCommand m_driveCommand = new DriveCommand(m_driveTrain, m_xboxController);
+  private final DriveCommand m_driveCommand = new DriveCommand(m_driveTrain, m_driveController);
   private final Intake m_Intake = new Intake();
-  private final BallIn m_BallIn = new BallIn(m_Intake, m_xboxController);
+  private final BallIn m_BallIn = new BallIn(m_Intake, m_driveController);
+  //private final BallOut m_BallOut = new BallOut(m_Intake, m_driveController);
   private final PopUpPistion m_PopUpPistion = new PopUpPistion();
   private final BallPop m_BallPop = new BallPop(m_PopUpPistion);
   private final WheelShooter m_WheelShooter = new WheelShooter();
-  private final BallShoot m_BallShoot = new BallShoot(m_WheelShooter, m_xboxController);
+  private final BallShoot m_BallShoot = new BallShoot(m_WheelShooter /*,m_driveController*/);
+  private final Turrent m_Turrent = new Turrent();
+  private final TurrentRotateL m_TurrentRotateL = new TurrentRotateL(m_Turrent);
+  private final TurrentRotateR m_TurrentRotateR = new TurrentRotateR(m_Turrent);
   
 
   /**
@@ -52,6 +56,7 @@ public class RobotContainer {
     configureButtonBindings();
     CommandScheduler.getInstance().setDefaultCommand(m_driveTrain, m_driveCommand);
     CommandScheduler.getInstance().setDefaultCommand(m_Intake, m_BallIn);
+    //CommandScheduler.getInstance().setDefaultCommand(m_PopUpPistion, m_BallOut);
   }
 
   /**
@@ -65,11 +70,17 @@ public class RobotContainer {
 
     //IntakeButton = new JoystickButton(m_xboxC)    
     final JoystickButton XButton;
+    final JoystickButton AButton;
+    final JoystickButton LeftBumper;
     final JoystickButton RightBumper;
-    XButton = new JoystickButton(m_xboxController, Constants.X_BUTTON);
-    RightBumper= new JoystickButton(m_xboxController, Constants.RIGHT_BUMPER);
+    AButton = new JoystickButton(m_driveController, Constants.A_BUTTON);
+    XButton = new JoystickButton(m_driveController, Constants.X_BUTTON);
+    LeftBumper = new JoystickButton(m_driveController, Constants.LEFT_BUMPER);
+    RightBumper = new JoystickButton(m_driveController, Constants.RIGHT_BUMPER);
     XButton.whenPressed(m_BallPop);
-    RightBumper.whenPressed(m_BallShoot);
+    AButton.whenPressed(m_BallShoot);
+    LeftBumper.whileHeld(m_TurrentRotateL);
+    RightBumper.whileHeld(m_TurrentRotateR);
   }
 
 
