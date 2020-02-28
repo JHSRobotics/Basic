@@ -7,6 +7,8 @@
 
 package frc.robot;
 
+import javax.annotation.WillClose;
+
 //import java.sql.DriverAction;
 
 import edu.wpi.first.wpilibj.GenericHID;
@@ -31,8 +33,8 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   //private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-
   private final XboxController m_driveController = new XboxController(Constants.DRIVER_CONTROLLER);
+  private final XboxController m_armController = new XboxController(Constants.ARM_CONTROLLER);
   private final DriveTrain m_driveTrain = new DriveTrain();
   private final Command m_autoCommand = new AutoCommand();
   private final DriveCommand m_driveCommand = new DriveCommand(m_driveTrain, m_driveController);
@@ -46,16 +48,26 @@ public class RobotContainer {
   private final Turrent m_Turrent = new Turrent();
   private final TurrentRotateL m_TurrentRotateL = new TurrentRotateL(m_Turrent);
   private final TurrentRotateR m_TurrentRotateR = new TurrentRotateR(m_Turrent);
-  
+  private final AutoTurrent m_AutoTurrent = new AutoTurrent(m_Turrent);
+  private final myLimeLight m_MyLimeLight = new myLimeLight();
+  //private final autoTarget m_AutoTarget = new autoTarget(m_MyLimeLight, m_driveTrain);
+  private final Winch m_Winch = new Winch();
+  private final winchIn m_WinchIn = new winchIn(m_Winch);
+  private final winchOut m_WinchOut = new winchOut(m_Winch);
+  private final Arm m_Arm = new Arm();
+  private final armUp m_ArmUp = new armUp(m_Arm, m_Winch);
+  private final Toggle_Lights m_Toggle_Lights = new Toggle_Lights(m_MyLimeLight);
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
+    //System.out.println("I'm Working");
     // Configure the button bindings
     configureButtonBindings();
     CommandScheduler.getInstance().setDefaultCommand(m_driveTrain, m_driveCommand);
     CommandScheduler.getInstance().setDefaultCommand(m_Intake, m_BallIn);
+
     //CommandScheduler.getInstance().setDefaultCommand(m_PopUpPistion, m_BallOut);
   }
 
@@ -67,20 +79,36 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     //final JoystickButton IntakeButton;
-
     //IntakeButton = new JoystickButton(m_xboxC)    
-    final JoystickButton XButton;
-    final JoystickButton AButton;
-    final JoystickButton LeftBumper;
-    final JoystickButton RightBumper;
-    AButton = new JoystickButton(m_driveController, Constants.A_BUTTON);
-    XButton = new JoystickButton(m_driveController, Constants.X_BUTTON);
-    LeftBumper = new JoystickButton(m_driveController, Constants.LEFT_BUMPER);
-    RightBumper = new JoystickButton(m_driveController, Constants.RIGHT_BUMPER);
-    XButton.whenPressed(m_BallPop);
-    AButton.whenPressed(m_BallShoot);
-    LeftBumper.whileHeld(m_TurrentRotateL);
-    RightBumper.whileHeld(m_TurrentRotateR);
+    final JoystickButton DriverXButton;
+    final JoystickButton DriverAButton;
+    final JoystickButton DriverYButton;
+    final JoystickButton DriverBButton;
+    final JoystickButton DriverLeftBumper;
+    final JoystickButton DriverRightBumper;
+    final JoystickButton ArmRightBumper;
+    final JoystickButton ArmLeftBumper;
+    final JoystickButton ArmYButton;
+
+    DriverAButton = new JoystickButton(m_driveController, Constants.A_BUTTON);
+    DriverXButton = new JoystickButton(m_driveController, Constants.X_BUTTON);
+    DriverYButton = new JoystickButton(m_driveController, Constants.Y_BUTTON);
+    DriverBButton = new JoystickButton(m_driveController, Constants.B_BUTTON);
+    DriverLeftBumper = new JoystickButton(m_driveController, Constants.LEFT_BUMPER);
+    DriverRightBumper = new JoystickButton(m_driveController, Constants.RIGHT_BUMPER);
+    ArmRightBumper = new JoystickButton(m_armController, Constants.RIGHT_BUMPER);
+    ArmLeftBumper = new JoystickButton(m_armController, Constants.LEFT_BUMPER);
+    ArmYButton = new JoystickButton(m_armController, Constants.Y_BUTTON);
+
+    DriverXButton.whenPressed(m_BallPop);
+    DriverAButton.whenPressed(m_BallShoot);
+    DriverYButton.whenPressed(m_AutoTurrent);
+    DriverBButton.whenPressed(m_Toggle_Lights);
+    DriverLeftBumper.whileHeld(m_TurrentRotateL);
+    DriverRightBumper.whileHeld(m_TurrentRotateR);
+    ArmRightBumper.whileHeld(m_WinchOut);
+    ArmLeftBumper.whileHeld(m_WinchIn);
+    ArmYButton.toggleWhenPressed(m_ArmUp);
   }
 
 

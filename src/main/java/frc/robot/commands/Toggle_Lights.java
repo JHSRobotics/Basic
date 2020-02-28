@@ -7,42 +7,35 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
-import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.myLimeLight;
+import limelightvision.limelight.frc.ControlMode.LedMode;
 
-public class DriveCommand extends CommandBase {
-
-  private final DriveTrain m_driveTrain;
-  private final XboxController m_xboxController;
-  private double leftStickY;
-  private double rightStickY;
+public class Toggle_Lights extends CommandBase {
+  private myLimeLight m_MyLimeLight;
   /**
-   * Creates a new DriveCommmand.
+   * Creates a new Toggle_Lights.
    */
-  public DriveCommand(DriveTrain subsystem, XboxController xboxController) {
+  public Toggle_Lights(myLimeLight subsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
-    m_driveTrain = subsystem;
-    m_xboxController = xboxController;
-    addRequirements(m_driveTrain);
+    m_MyLimeLight = subsystem;
+    addRequirements(m_MyLimeLight);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    
+    if(m_MyLimeLight.getLimeLight().getLEDMode() != LedMode.kforceOff ){
+      m_MyLimeLight.getLimeLight().setLEDMode(LedMode.kforceOff);
+    }
+    else{
+      m_MyLimeLight.getLimeLight().setLEDMode(LedMode.kforceOn);
+    }
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-
-    leftStickY = m_xboxController.getRawAxis(Constants.LEFT_STICK_Y);
-    rightStickY = m_xboxController.getRawAxis(Constants.RIGHT_STICK_Y);
-
-    m_driveTrain.setLeftMotor(leftStickY*Constants.ROBOT_SPEED);
-    m_driveTrain.setRightMotor(rightStickY*Constants.ROBOT_SPEED);
   }
 
   // Called once the command ends or is interrupted.
@@ -53,6 +46,6 @@ public class DriveCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 }

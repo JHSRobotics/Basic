@@ -7,47 +7,35 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
-import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Winch;
 
-public class DriveCommand extends CommandBase {
-
-  private final DriveTrain m_driveTrain;
-  private final XboxController m_xboxController;
-  private double leftStickY;
-  private double rightStickY;
+public class winchOut extends CommandBase {
+  private Winch m_Winch;
   /**
-   * Creates a new DriveCommmand.
+   * Creates a new winchOut.
    */
-  public DriveCommand(DriveTrain subsystem, XboxController xboxController) {
+  public winchOut(Winch subsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
-    m_driveTrain = subsystem;
-    m_xboxController = xboxController;
-    addRequirements(m_driveTrain);
+    m_Winch = subsystem;
+    //addRequirements(m_Winch);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-
-    leftStickY = m_xboxController.getRawAxis(Constants.LEFT_STICK_Y);
-    rightStickY = m_xboxController.getRawAxis(Constants.RIGHT_STICK_Y);
-
-    m_driveTrain.setLeftMotor(leftStickY*Constants.ROBOT_SPEED);
-    m_driveTrain.setRightMotor(rightStickY*Constants.ROBOT_SPEED);
+    m_Winch.winchOut();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    m_Winch.winchStop();
   }
 
   // Returns true when the command should end.

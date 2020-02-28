@@ -21,30 +21,38 @@ public final class  Constants {
     public static final int RIGHT_DRIVE_VICTOR_1 = 2;
     public static final int RIGHT_DRIVE_VICTOR_2 = 3;
     public static final double ROBOT_SPEED = 0.9;
+    public static final double TARGET_SPEED = 0.2;
 
     public static final int TURRET_VICTOR = 4;
     public static final double TURRENT_SPEED = 0.1;
+    public static final double TURRENT_THRESHOLD = 2;
 
     public static final int WINCH_HOOK_VICTOR = 5;
+    public static final double WINCH_SPEED = 0.3;
 
     public static final int SHOOTER_TALON = 6;
-    public static final double SHOOTER_SPEED = 0.9;
+    public static final double SHOOTER_SPEED = 1;
 
     public static final int INTAKE_TALON = 7;
     public static final double INTAKE_SPEED = -0.75;
 
     public static final int WINCH_LIFT_VICTOR = 8;
+    public static final double ARM_SPEED = 0.3;
+    public static final double ARM_STALL_SPEED = 0;
 
     public static final int SHOOTER_PISTON = 0;
 
     public static final int DRIVER_CONTROLLER = 0;
+    public static final int ARM_CONTROLLER = 1;
     public static final int SHOOTER_CONTROLLER = 1;
     public static final int LEFT_STICK_Y = 1;
     public static final int RIGHT_STICK_Y = 5;
     public static final int RIGHT_TRIGGER = 3;
     public static final int LEFT_TRIGGER = 2;
     public static final int X_BUTTON = 3;
+    public static final int Y_BUTTON = 4;
     public static final int A_BUTTON = 1;
+    public static final int B_BUTTON = 2;
     public static final int RIGHT_BUMPER = 5;
     public static final int LEFT_BUMPER = 6;
 }

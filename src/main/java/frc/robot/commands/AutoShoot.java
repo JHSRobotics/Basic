@@ -7,42 +7,30 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
-import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.WheelShooter;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 
-public class DriveCommand extends CommandBase {
-
-  private final DriveTrain m_driveTrain;
-  private final XboxController m_xboxController;
-  private double leftStickY;
-  private double rightStickY;
+public class AutoShoot extends CommandBase {
   /**
-   * Creates a new DriveCommmand.
+   * Creates a new AutoShoot.
    */
-  public DriveCommand(DriveTrain subsystem, XboxController xboxController) {
+  public AutoShoot() {
     // Use addRequirements() here to declare subsystem dependencies.
-    m_driveTrain = subsystem;
-    m_xboxController = xboxController;
-    addRequirements(m_driveTrain);
+    
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-
-    leftStickY = m_xboxController.getRawAxis(Constants.LEFT_STICK_Y);
-    rightStickY = m_xboxController.getRawAxis(Constants.RIGHT_STICK_Y);
-
-    m_driveTrain.setLeftMotor(leftStickY*Constants.ROBOT_SPEED);
-    m_driveTrain.setRightMotor(rightStickY*Constants.ROBOT_SPEED);
   }
 
   // Called once the command ends or is interrupted.

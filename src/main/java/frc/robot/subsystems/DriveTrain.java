@@ -42,6 +42,41 @@ public class DriveTrain extends SubsystemBase {
     leftDriveVictor2.set(-speed);
     //System.out.println("SET RIGHT");
   }
+
+  public void turnRight(){
+    rightDriveVictor1.set(Constants.TARGET_SPEED);
+    rightDriveVictor2.set(Constants.TARGET_SPEED);
+    leftDriveVictor1.set(Constants.TARGET_SPEED);
+    leftDriveVictor2.set(Constants.TARGET_SPEED);
+  }
+
+  public void turnLeft(){
+    rightDriveVictor1.set(-Constants.TARGET_SPEED);
+    rightDriveVictor2.set(-Constants.TARGET_SPEED);
+    leftDriveVictor1.set(-Constants.TARGET_SPEED);
+    leftDriveVictor2.set(-Constants.TARGET_SPEED);
+  }
+
+  public void moveForward(){
+    rightDriveVictor1.set(Constants.TARGET_SPEED);
+    rightDriveVictor2.set(Constants.TARGET_SPEED);
+    leftDriveVictor1.set(-Constants.TARGET_SPEED);
+    leftDriveVictor2.set(-Constants.TARGET_SPEED);
+  }
+
+  public void moveBackward(){
+    rightDriveVictor1.set(-Constants.TARGET_SPEED);
+    rightDriveVictor2.set(-Constants.TARGET_SPEED);
+    leftDriveVictor1.set(Constants.TARGET_SPEED);
+    leftDriveVictor2.set(Constants.TARGET_SPEED);
+  }
+
+  public void stop(){
+    rightDriveVictor1.set(0);
+    rightDriveVictor2.set(0);
+    leftDriveVictor1.set(0);
+    leftDriveVictor2.set(0);
+  }
 /*
   public double GetDriverRawAxis(int axis){
     return m_xboxController.getRawAxis(axis);
