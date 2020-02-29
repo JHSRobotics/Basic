@@ -26,6 +26,30 @@ public class WheelShooter extends SubsystemBase {
     shootWheel.set(Constants.SHOOTER_SPEED);
   }
 
+  public void shooterHalfSpeed() {
+    shootWheel.set(Constants.HALF_SPEED);
+  }
+
+  public void shoot10Ft() {
+    shootWheel.set(Constants.SPEED_10_FEET);
+  }
+
+  public void shoot11Ft() {
+    shootWheel.set(Constants.SPEED_11_FEET);
+  }
+
+  public void shoot12Ft() {
+    shootWheel.set(Constants.SPEED_12_FEET);
+  }
+
+  public void shoot13Ft() {
+    shootWheel.set(Constants.SPEED_13_FEET);
+  }
+
+  public void shoot14Ft() {
+    shootWheel.set(Constants.SPEED_14_FEET);
+  }
+
   public void shooterOff() {
     shootWheel.set(0);
   }

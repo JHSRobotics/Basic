@@ -44,11 +44,11 @@ public class BallIn extends CommandBase {
     double lTriggerValue = m_xboxController.getRawAxis(Constants.LEFT_TRIGGER);
     //System.out.println("Trigger value: " + rTriggerValue);
     if (rTriggerValue>0) {
-      m_Intake.setIntake(rTriggerValue);
+      m_Intake.setIntake(-rTriggerValue);
       //System.out.println("Right trigger value: " + rTriggerValue);
     }
     else if (lTriggerValue>0) {
-      m_Intake.setIntake(-lTriggerValue);
+      m_Intake.setIntake(lTriggerValue);
       //System.out.println("Left trigger value: " + lTriggerValue);
     }
     else {

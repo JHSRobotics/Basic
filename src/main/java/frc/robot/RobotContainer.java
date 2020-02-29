@@ -36,7 +36,6 @@ public class RobotContainer {
   private final XboxController m_driveController = new XboxController(Constants.DRIVER_CONTROLLER);
   private final XboxController m_armController = new XboxController(Constants.ARM_CONTROLLER);
   private final DriveTrain m_driveTrain = new DriveTrain();
-  private final Command m_autoCommand = new AutoCommand();
   private final DriveCommand m_driveCommand = new DriveCommand(m_driveTrain, m_driveController);
   private final Intake m_Intake = new Intake();
   private final BallIn m_BallIn = new BallIn(m_Intake, m_driveController);
@@ -45,6 +44,7 @@ public class RobotContainer {
   private final BallPop m_BallPop = new BallPop(m_PopUpPistion);
   private final WheelShooter m_WheelShooter = new WheelShooter();
   private final BallShoot m_BallShoot = new BallShoot(m_WheelShooter /*,m_driveController*/);
+  private final AutoShoot m_AutoShoot = new AutoShoot(m_WheelShooter);
   private final Turrent m_Turrent = new Turrent();
   private final TurrentRotateL m_TurrentRotateL = new TurrentRotateL(m_Turrent);
   private final TurrentRotateR m_TurrentRotateR = new TurrentRotateR(m_Turrent);
@@ -57,6 +57,10 @@ public class RobotContainer {
   private final Arm m_Arm = new Arm();
   private final armUp m_ArmUp = new armUp(m_Arm, m_Winch);
   private final Toggle_Lights m_Toggle_Lights = new Toggle_Lights(m_MyLimeLight);
+  private final AutoCommand m_autoCommand = new AutoCommand(m_driveTrain);
+  private final ConstantAutoTurrent m_ConstantAutoTurrent = new ConstantAutoTurrent(m_Turrent);
+  private final ConstantAutoShoot m_ConstantAutoShoot = new ConstantAutoShoot(m_WheelShooter);
+  private final Shoot90 m_Shoot90 = new Shoot90(m_WheelShooter);
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -83,32 +87,38 @@ public class RobotContainer {
     final JoystickButton DriverXButton;
     final JoystickButton DriverAButton;
     final JoystickButton DriverYButton;
-    final JoystickButton DriverBButton;
     final JoystickButton DriverLeftBumper;
     final JoystickButton DriverRightBumper;
+    final JoystickButton DriverMenuButton;
     final JoystickButton ArmRightBumper;
     final JoystickButton ArmLeftBumper;
     final JoystickButton ArmYButton;
+    final JoystickButton ArmAButton;
 
     DriverAButton = new JoystickButton(m_driveController, Constants.A_BUTTON);
     DriverXButton = new JoystickButton(m_driveController, Constants.X_BUTTON);
     DriverYButton = new JoystickButton(m_driveController, Constants.Y_BUTTON);
-    DriverBButton = new JoystickButton(m_driveController, Constants.B_BUTTON);
+    DriverMenuButton = new JoystickButton(m_driveController, Constants.MENU_BUTTON);
     DriverLeftBumper = new JoystickButton(m_driveController, Constants.LEFT_BUMPER);
     DriverRightBumper = new JoystickButton(m_driveController, Constants.RIGHT_BUMPER);
     ArmRightBumper = new JoystickButton(m_armController, Constants.RIGHT_BUMPER);
     ArmLeftBumper = new JoystickButton(m_armController, Constants.LEFT_BUMPER);
     ArmYButton = new JoystickButton(m_armController, Constants.Y_BUTTON);
+    ArmAButton = new JoystickButton(m_armController, Constants.A_BUTTON);
 
     DriverXButton.whenPressed(m_BallPop);
-    DriverAButton.whenPressed(m_BallShoot);
-    DriverYButton.whenPressed(m_AutoTurrent);
-    DriverBButton.whenPressed(m_Toggle_Lights);
+    //DriverAButton.whenPressed(m_BallShoot);
+    //DriverAButton.whenPressed(m_AutoShoot);
+    DriverAButton.toggleWhenPressed(m_ConstantAutoShoot);
+    //DriverYButton.whenPressed(m_AutoTurrent);
+    DriverYButton.toggleWhenPressed(m_ConstantAutoTurrent);
+    DriverMenuButton.whenPressed(m_Toggle_Lights);
     DriverLeftBumper.whileHeld(m_TurrentRotateL);
     DriverRightBumper.whileHeld(m_TurrentRotateR);
     ArmRightBumper.whileHeld(m_WinchOut);
     ArmLeftBumper.whileHeld(m_WinchIn);
     ArmYButton.toggleWhenPressed(m_ArmUp);
+    ArmAButton.whenPressed(m_Shoot90);
   }
 
 

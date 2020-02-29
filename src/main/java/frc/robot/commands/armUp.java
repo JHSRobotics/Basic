@@ -42,7 +42,7 @@ public class armUp extends CommandBase {
   @Override
   public void end(boolean interrupted) {
 
-    //m_Arm.armStall();
+    m_Arm.armStop();
     //m_Winch.winchStop();
 
   }

@@ -15,7 +15,7 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 
-public class AutoTurrent extends CommandBase {
+public class ConstantAutoTurrent extends CommandBase {
 
   private Turrent m_Turrent;
   private NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
@@ -30,7 +30,7 @@ public class AutoTurrent extends CommandBase {
   /**
    * Creates a new AutoTurrent.
    */
-  public AutoTurrent(Turrent subsystem) {
+  public ConstantAutoTurrent(Turrent subsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_Turrent = subsystem;
     addRequirements(m_Turrent);
@@ -70,18 +70,18 @@ public class AutoTurrent extends CommandBase {
     }
     else {
       m_Turrent.STOP();
-      Finished = true;
     }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    m_Turrent.STOP();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return Finished;
+    return false;
   }
 }

@@ -21,17 +21,31 @@ public final class  Constants {
     public static final int RIGHT_DRIVE_VICTOR_1 = 2;
     public static final int RIGHT_DRIVE_VICTOR_2 = 3;
     public static final double ROBOT_SPEED = 0.9;
-    public static final double TARGET_SPEED = 0.2;
+    public static final double AUTO_SPEED = 0.3;
+    public static final double AUTO_SPEED_SLOW = 0.1;
+    public static boolean TELEOP_DRIVE = true;
+    //public static final double TARGET_SPEED = 0.2;
 
     public static final int TURRET_VICTOR = 4;
-    public static final double TURRENT_SPEED = 0.1;
+    public static final double TURRENT_SPEED = 0.075;
     public static final double TURRENT_THRESHOLD = 2;
 
     public static final int WINCH_HOOK_VICTOR = 5;
-    public static final double WINCH_SPEED = 0.3;
+    public static final double WINCH_SPEED = 0.7;
 
     public static final int SHOOTER_TALON = 6;
-    public static final double SHOOTER_SPEED = 1;
+    public static final double SHOOTER_SPEED = 0.9;
+    public static final double HALF_SPEED = 0.5;
+    public static final double AREA_10_FEET = 2.78;
+    public static final double SPEED_10_FEET = 0.675;
+    public static final double AREA_11_FEET = 2.45;
+    public static final double SPEED_11_FEET = 0.7;
+    public static final double AREA_12_FEET = 2;
+    public static final double SPEED_12_FEET = 0.8;
+    public static final double AREA_13_FEET = 1.86;
+    public static final double SPEED_13_FEET = 0.85;
+    public static final double AREA_14_FEET = 1.63;
+    public static final double SPEED_14_FEET = 0.925;
 
     public static final int INTAKE_TALON = 7;
     public static final double INTAKE_SPEED = -0.75;
@@ -55,4 +69,5 @@ public final class  Constants {
     public static final int B_BUTTON = 2;
     public static final int RIGHT_BUMPER = 5;
     public static final int LEFT_BUMPER = 6;
+    public static final int MENU_BUTTON = 7;
 }

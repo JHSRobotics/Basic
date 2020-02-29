@@ -29,7 +29,7 @@ public class Arm extends SubsystemBase {
   public void armDown(){
     arm.set(Constants.ARM_SPEED);
   }
-
+  
   public void armStop(){
     arm.set(0);
   }
