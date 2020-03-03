@@ -9,17 +9,18 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import edu.wpi.first.wpilibj.Talon;
+//import edu.wpi.first.wpilibj.Talon;
 //import frc.robot.Constants;
+import edu.wpi.first.wpilibj.Victor;
 
 public class WheelShooter extends SubsystemBase {
   
-  private Talon shootWheel;
+  private Victor shootWheel;
   /**
    * Creates a new WheelShooter.
    */
   public WheelShooter() {
-    shootWheel = new Talon(Constants.SHOOTER_TALON);
+    shootWheel = new Victor(Constants.SHOOTER_VICTOR);
   }
 
   public void shooterOn() {

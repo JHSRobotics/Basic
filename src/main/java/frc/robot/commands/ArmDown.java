@@ -8,17 +8,17 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Winch;
+import frc.robot.subsystems.Arm;
 
-public class winchOut extends CommandBase {
-  private Winch m_Winch;
+public class ArmDown extends CommandBase {
+  private final Arm m_Arm;
   /**
-   * Creates a new winchOut.
+   * Creates a new ArmDown.
    */
-  public winchOut(Winch subsystem) {
+  public ArmDown(Arm subArm) {
     // Use addRequirements() here to declare subsystem dependencies.
-    m_Winch = subsystem;
-    //addRequirements(m_Winch);
+    m_Arm = subArm;
+    addRequirements(m_Arm);
   }
 
   // Called when the command is initially scheduled.
@@ -29,13 +29,12 @@ public class winchOut extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_Winch.winchOut();
+    m_Arm.armDown(0.3);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_Winch.winchStop();
   }
 
   // Returns true when the command should end.

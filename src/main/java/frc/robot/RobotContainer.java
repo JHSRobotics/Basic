@@ -7,7 +7,7 @@
 
 package frc.robot;
 
-import javax.annotation.WillClose;
+//import javax.annotation.WillClose;
 
 //import java.sql.DriverAction;
 
@@ -43,24 +43,29 @@ public class RobotContainer {
   private final PopUpPistion m_PopUpPistion = new PopUpPistion();
   private final BallPop m_BallPop = new BallPop(m_PopUpPistion);
   private final WheelShooter m_WheelShooter = new WheelShooter();
-  private final BallShoot m_BallShoot = new BallShoot(m_WheelShooter /*,m_driveController*/);
-  private final AutoShoot m_AutoShoot = new AutoShoot(m_WheelShooter);
+  //private final BallShoot m_BallShoot = new BallShoot(m_WheelShooter /*,m_driveController*/);
+  //private final AutoShoot m_AutoShoot = new AutoShoot(m_WheelShooter);
   private final Turrent m_Turrent = new Turrent();
   private final TurrentRotateL m_TurrentRotateL = new TurrentRotateL(m_Turrent);
   private final TurrentRotateR m_TurrentRotateR = new TurrentRotateR(m_Turrent);
-  private final AutoTurrent m_AutoTurrent = new AutoTurrent(m_Turrent);
+  //private final AutoTurrent m_AutoTurrent = new AutoTurrent(m_Turrent);
   private final myLimeLight m_MyLimeLight = new myLimeLight();
   //private final autoTarget m_AutoTarget = new autoTarget(m_MyLimeLight, m_driveTrain);
   private final Winch m_Winch = new Winch();
-  private final winchIn m_WinchIn = new winchIn(m_Winch);
-  private final winchOut m_WinchOut = new winchOut(m_Winch);
+  //private final winchIn m_WinchIn = new winchIn(m_Winch);
+  //private final winchOut m_WinchOut = new winchOut(m_Winch);
   private final Arm m_Arm = new Arm();
-  private final armUp m_ArmUp = new armUp(m_Arm, m_Winch);
+  private final ArmCommand m_ArmCommand = new ArmCommand(m_Arm, m_Winch, m_armController);
   private final Toggle_Lights m_Toggle_Lights = new Toggle_Lights(m_MyLimeLight);
-  private final AutoCommand m_autoCommand = new AutoCommand(m_driveTrain);
+  private final AutonomusCommand m_AutonomusCommand = new AutonomusCommand(m_driveTrain);
   private final ConstantAutoTurrent m_ConstantAutoTurrent = new ConstantAutoTurrent(m_Turrent);
   private final ConstantAutoShoot m_ConstantAutoShoot = new ConstantAutoShoot(m_WheelShooter);
   private final Shoot90 m_Shoot90 = new Shoot90(m_WheelShooter);
+  private final RaiseRobot m_RaiseRobot = new RaiseRobot(m_Winch); 
+  private final LowerRobot m_LowerRobot = new LowerRobot(m_Winch);
+  private final ArmUp m_ArmUp = new ArmUp(m_Arm);
+  private final ArmDown m_ArmDown = new ArmDown(m_Arm);
+
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -71,7 +76,8 @@ public class RobotContainer {
     configureButtonBindings();
     CommandScheduler.getInstance().setDefaultCommand(m_driveTrain, m_driveCommand);
     CommandScheduler.getInstance().setDefaultCommand(m_Intake, m_BallIn);
-
+    CommandScheduler.getInstance().setDefaultCommand(m_Winch, m_ArmCommand);
+    //CommandScheduler.getInstance().setDefaultCommand(m_Winch, m_WinchCommand);
     //CommandScheduler.getInstance().setDefaultCommand(m_PopUpPistion, m_BallOut);
   }
 
@@ -93,6 +99,7 @@ public class RobotContainer {
     final JoystickButton ArmRightBumper;
     final JoystickButton ArmLeftBumper;
     final JoystickButton ArmYButton;
+    final JoystickButton ArmXButton;
     final JoystickButton ArmAButton;
 
     DriverAButton = new JoystickButton(m_driveController, Constants.A_BUTTON);
@@ -104,6 +111,7 @@ public class RobotContainer {
     ArmRightBumper = new JoystickButton(m_armController, Constants.RIGHT_BUMPER);
     ArmLeftBumper = new JoystickButton(m_armController, Constants.LEFT_BUMPER);
     ArmYButton = new JoystickButton(m_armController, Constants.Y_BUTTON);
+    ArmXButton = new JoystickButton(m_armController, Constants.X_BUTTON);
     ArmAButton = new JoystickButton(m_armController, Constants.A_BUTTON);
 
     DriverXButton.whenPressed(m_BallPop);
@@ -115,9 +123,10 @@ public class RobotContainer {
     DriverMenuButton.whenPressed(m_Toggle_Lights);
     DriverLeftBumper.whileHeld(m_TurrentRotateL);
     DriverRightBumper.whileHeld(m_TurrentRotateR);
-    ArmRightBumper.whileHeld(m_WinchOut);
-    ArmLeftBumper.whileHeld(m_WinchIn);
-    ArmYButton.toggleWhenPressed(m_ArmUp);
+    ArmRightBumper.whileHeld(m_ArmUp);
+    ArmLeftBumper.whileHeld(m_ArmDown);
+    ArmYButton.toggleWhenPressed(m_LowerRobot);
+    ArmXButton.whenPressed(m_RaiseRobot);
     ArmAButton.whenPressed(m_Shoot90);
   }
 
@@ -129,6 +138,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return m_autoCommand;
+    return m_AutonomusCommand;
   }
 }

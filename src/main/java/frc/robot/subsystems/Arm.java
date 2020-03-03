@@ -9,25 +9,27 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import edu.wpi.first.wpilibj.Victor;
+//import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.Talon;
 
 public class Arm extends SubsystemBase {
   
-  private final Victor arm;
+  private final Talon arm;
   
   /**
    * Creates a new Arm.
    */
   public Arm() {
-    arm = new Victor(Constants.WINCH_HOOK_VICTOR);
+    arm = new Talon(Constants.ARM_TALON);
   }
 
-  public void armUp(){
-    arm.set(-Constants.ARM_SPEED);
+  public void armUp(double speed){
+    //arm.set(-Constants.ARM_SPEED);
+    arm.set(-speed);
   }
 
-  public void armDown(){
-    arm.set(Constants.ARM_SPEED);
+  public void armDown(double speed){
+    arm.set(speed);
   }
   
   public void armStop(){

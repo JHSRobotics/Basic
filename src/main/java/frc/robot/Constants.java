@@ -30,10 +30,12 @@ public final class  Constants {
     public static final double TURRENT_SPEED = 0.075;
     public static final double TURRENT_THRESHOLD = 2;
 
-    public static final int WINCH_HOOK_VICTOR = 5;
-    public static final double WINCH_SPEED = 0.7;
+    public static final int ARM_TALON = 5;
+    public static final double ARM_SPEED = 0.9;
+    public static final double ARM_STALL_SPEED = 0;
 
-    public static final int SHOOTER_TALON = 6;
+
+    public static final int SHOOTER_VICTOR = 6;
     public static final double SHOOTER_SPEED = 0.9;
     public static final double HALF_SPEED = 0.5;
     public static final double AREA_10_FEET = 2.78;
@@ -49,10 +51,12 @@ public final class  Constants {
 
     public static final int INTAKE_TALON = 7;
     public static final double INTAKE_SPEED = -0.75;
+    public static final double AUTO_INTAKE_SPEED = -0.3;
 
-    public static final int WINCH_LIFT_VICTOR = 8;
-    public static final double ARM_SPEED = 0.3;
-    public static final double ARM_STALL_SPEED = 0;
+    public static final int WINCH_LIFT_TALON = 9;
+    public static final double WINCH_SPEED_CAP = 0.9;
+    public static final double WINCH_LIFT_SPEED = 0.8;
+
 
     public static final int SHOOTER_PISTON = 0;
 
@@ -70,4 +74,6 @@ public final class  Constants {
     public static final int RIGHT_BUMPER = 5;
     public static final int LEFT_BUMPER = 6;
     public static final int MENU_BUTTON = 7;
+
+    public static final long DELAY_AMOUNT = 300;
 }

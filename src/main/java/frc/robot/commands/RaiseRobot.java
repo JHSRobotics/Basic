@@ -8,19 +8,19 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
+//import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.subsystems.Winch;
 
-public class winchIn extends CommandBase {
-  
-  private Winch m_Winch;
-  
+public class RaiseRobot extends CommandBase { 
+  private final Winch m_Winch;
   /**
-   * Creates a new winchIn.
+   * Creates a new WinchCommand.
    */
-  public winchIn(Winch subsystem) {
+  public RaiseRobot(Winch subsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_Winch = subsystem;
-    //addRequirements(m_Winch);
+    addRequirements(m_Winch);
   }
 
   // Called when the command is initially scheduled.
@@ -31,14 +31,15 @@ public class winchIn extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    //System.out.println("winch is on mechanical error");
-    m_Winch.winchIn();
+    m_Winch.winchOut(/*Constants.WINCH_LIFT_SPEED*/);
+    System.out.println("Winch In");
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     m_Winch.winchStop();
+    System.out.println("Winch Stop");
   }
 
   // Returns true when the command should end.
