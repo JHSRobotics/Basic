@@ -38,7 +38,7 @@ public final class  Constants {
 
     public static final int SHOOTER_VICTOR = 6;
     public static final double SHOOTER_SPEED = 0.9;
-    public static final double HALF_SPEED = 0.675;
+    public static final double HALF_SPEED = 0.68;
     public static final double AREA_10_FEET = 2.78;
     public static final double SPEED_10_FEET = 0.675;
     public static final double AREA_11_FEET = 2.5;
