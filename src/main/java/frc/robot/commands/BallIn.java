@@ -43,6 +43,7 @@ public class BallIn extends CommandBase {
     double rTriggerValue = m_xboxController.getRawAxis(Constants.RIGHT_TRIGGER);
     double lTriggerValue = m_xboxController.getRawAxis(Constants.LEFT_TRIGGER);
     //System.out.println("Trigger value: " + rTriggerValue);
+    if (Constants.TELEOP_INTAKE == true){
     if (rTriggerValue>0) {
       m_Intake.setIntake(-rTriggerValue);
       //System.out.println("Right trigger value: " + rTriggerValue);
@@ -54,6 +55,7 @@ public class BallIn extends CommandBase {
     else {
       m_Intake.intakeOff();
     }
+  }
   }
 
   // Called once the command ends or is interrupted.

@@ -25,12 +25,12 @@ public class Winch extends SubsystemBase {
     winch = new Talon(Constants.WINCH_LIFT_TALON);
   }
 
-  public void winchIn(/*double speed*/){
-    winch.set(-Constants.WINCH_LIFT_SPEED);
+  public void winchIn(double speed){
+    winch.set(-speed*Constants.WINCH_SPEED_CAP);
   }
 
-  public void winchOut(/*double speed*/){
-    winch.set(Constants.WINCH_LIFT_SPEED);
+  public void winchOut(double speed){
+    winch.set(speed*Constants.WINCH_SPEED_CAP);
   }
 
   public void winchStop(){

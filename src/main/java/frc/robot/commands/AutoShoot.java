@@ -67,7 +67,7 @@ public class AutoShoot extends CommandBase {
       System.out.println("Shoot14");
     }
     else {
-      m_WheelShooter.shooterHalfSpeed();
+      m_WheelShooter.shooterOn();
       System.out.println("Out of Range");
     }
   }

@@ -42,12 +42,12 @@ public class ArmCommand extends CommandBase {
     double lTriggerValue = m_XboxController.getRawAxis(Constants.LEFT_TRIGGER);
     if (rTriggerValue>0) {
       //m_Arm.armUp(rTriggerValue*Constants.ARM_SPEED);
-      m_Winch.winchOut(/*rTriggerValue*Constants.WINCH_SPEED_CAP*/);
+      m_Winch.winchOut(rTriggerValue);
       //System.out.println("Right trigger value: " + rTriggerValue);
     }
     else if (lTriggerValue>0) {
       //m_Arm.armDown(lTriggerValue*Constants.ARM_SPEED);
-      m_Winch.winchIn(/*lTriggerValue*Constants.WINCH_SPEED_CAP*/);
+      m_Winch.winchIn(lTriggerValue);
       //System.out.println("Left trigger value: " + lTriggerValue);
     }
     else {

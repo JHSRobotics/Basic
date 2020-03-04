@@ -48,7 +48,8 @@ public class RobotContainer {
   private final Turrent m_Turrent = new Turrent();
   private final TurrentRotateL m_TurrentRotateL = new TurrentRotateL(m_Turrent);
   private final TurrentRotateR m_TurrentRotateR = new TurrentRotateR(m_Turrent);
-  //private final AutoTurrent m_AutoTurrent = new AutoTurrent(m_Turrent);
+  private final AutoTurrent m_AutoTurrent = new AutoTurrent(m_Turrent);
+  private final AutoShoot m_AutoShoot = new AutoShoot(m_WheelShooter);
   private final myLimeLight m_MyLimeLight = new myLimeLight();
   //private final autoTarget m_AutoTarget = new autoTarget(m_MyLimeLight, m_driveTrain);
   private final Winch m_Winch = new Winch();
@@ -57,14 +58,14 @@ public class RobotContainer {
   private final Arm m_Arm = new Arm();
   private final ArmCommand m_ArmCommand = new ArmCommand(m_Arm, m_Winch, m_armController);
   private final Toggle_Lights m_Toggle_Lights = new Toggle_Lights(m_MyLimeLight);
-  private final AutonomusCommand m_AutonomusCommand = new AutonomusCommand(m_driveTrain);
   private final ConstantAutoTurrent m_ConstantAutoTurrent = new ConstantAutoTurrent(m_Turrent);
   private final ConstantAutoShoot m_ConstantAutoShoot = new ConstantAutoShoot(m_WheelShooter);
   private final Shoot90 m_Shoot90 = new Shoot90(m_WheelShooter);
-  private final RaiseRobot m_RaiseRobot = new RaiseRobot(m_Winch); 
-  private final LowerRobot m_LowerRobot = new LowerRobot(m_Winch);
+  //private final RaiseRobot m_RaiseRobot = new RaiseRobot(m_Winch); 
+  //private final LowerRobot m_LowerRobot = new LowerRobot(m_Winch);
   private final ArmUp m_ArmUp = new ArmUp(m_Arm);
   private final ArmDown m_ArmDown = new ArmDown(m_Arm);
+  private final AutonomusCommand m_AutonomusCommand = new AutonomusCommand(m_driveTrain, m_AutoTurrent, m_AutoShoot, m_Intake, m_PopUpPistion, m_WheelShooter);
 
 
   /**
@@ -125,8 +126,8 @@ public class RobotContainer {
     DriverRightBumper.whileHeld(m_TurrentRotateR);
     ArmRightBumper.whileHeld(m_ArmUp);
     ArmLeftBumper.whileHeld(m_ArmDown);
-    ArmYButton.toggleWhenPressed(m_LowerRobot);
-    ArmXButton.whenPressed(m_RaiseRobot);
+    //ArmYButton.toggleWhenPressed(m_LowerRobot);
+    //ArmXButton.whenPressed(m_RaiseRobot);
     ArmAButton.whenPressed(m_Shoot90);
   }
 

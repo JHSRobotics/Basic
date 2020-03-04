@@ -19,6 +19,7 @@ import frc.robot.subsystems.WheelShooter;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Timer;
 
 //import frc.robot.subsystems.myLimeLight;
@@ -49,6 +50,7 @@ public class AutonomusCommand extends CommandBase {
   private Turrent m_Turrent;
   private WheelShooter m_WheelShooter;
   private boolean Finsihed;
+  private Compressor m_Compressor;
   /*
   private double Delay1;
   private double Delay1a;
@@ -73,9 +75,16 @@ public class AutonomusCommand extends CommandBase {
   /**
    * Creates a new AutoCommand.
    */
-  public AutonomusCommand(DriveTrain driveTrain) {
+  public AutonomusCommand(DriveTrain driveTrain, AutoTurrent autoTurrent, AutoShoot autoShoot, Intake intake, PopUpPistion popUpPistion, WheelShooter wheelShooter) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_DriveTrain = driveTrain;
+    m_AutoTurrent = autoTurrent;
+    m_AutoShoot = autoShoot;
+    //m_DriveTrain
+    m_Intake = intake;
+    m_PopUpPistion = popUpPistion;
+    //m_Turrent
+    m_WheelShooter = wheelShooter;
   }
 
   // Called when the command is initially scheduled.
@@ -83,11 +92,12 @@ public class AutonomusCommand extends CommandBase {
   public void initialize() {
     start = System.currentTimeMillis();
     lineup = start+1000;
-    shoot = lineup+5000;
+    shoot = lineup+10000;
     initialDriveStop = shoot+1500;
     driveStop = initialDriveStop+1500;
     //end = driveStop+1500;
     Constants.TELEOP_DRIVE = false;
+    Constants.TELEOP_INTAKE = false;
     Finsihed = false;
     hasShot = false;
   }
@@ -108,13 +118,42 @@ public class AutonomusCommand extends CommandBase {
       new Thread() {
         public void run(){
           try{
-          m_PopUpPistion.pistonUp();
-          Thread.sleep(Constants.DELAY_AMOUNT);
-          m_PopUpPistion.pistonDown();
-          Thread.sleep(Constants.DELAY_AMOUNT);
+          m_Compressor = new Compressor();
+          m_Compressor.stop();
+          Thread.sleep(1500);
           m_Intake.setIntake(Constants.AUTO_INTAKE_SPEED);
           m_PopUpPistion.pistonUp();
-          Thread.sleep(Constants.DELAY_AMOUNT);
+          Thread.sleep(Constants.SHORT_DELAY_AMOUNT);
+          m_PopUpPistion.pistonDown();
+          m_Intake.setIntake(Constants.AUTO_INTAKE_SPEED);
+          Thread.sleep(Constants.LONG_DELAY_AMOUNT);
+          m_Intake.setIntake(0.3);
+          Thread.sleep(500);
+          m_Intake.setIntake(0);
+          m_PopUpPistion.pistonUp();
+          Thread.sleep(Constants.SHORT_DELAY_AMOUNT);
+          m_PopUpPistion.pistonDown();
+          m_Intake.setIntake(Constants.AUTO_INTAKE_SPEED);
+          Thread.sleep(Constants.LONG_DELAY_AMOUNT);
+          m_Intake.setIntake(0.3);
+          Thread.sleep(500);
+          m_Intake.setIntake(0);
+          m_PopUpPistion.pistonUp();
+          Thread.sleep(Constants.SHORT_DELAY_AMOUNT);
+          m_PopUpPistion.pistonDown();
+          m_Intake.setIntake(Constants.AUTO_INTAKE_SPEED);
+          Thread.sleep(Constants.LONG_DELAY_AMOUNT);
+          m_Intake.setIntake(0.3);
+          Thread.sleep(500);
+          m_Intake.setIntake(0);
+          m_PopUpPistion.pistonUp();
+          Thread.sleep(Constants.SHORT_DELAY_AMOUNT);
+          m_PopUpPistion.pistonDown();
+          Thread.sleep(Constants.SHORT_DELAY_AMOUNT);
+          //m_Intake.setIntake(Constants.AUTO_INTAKE_SPEED);
+          //Thread.sleep(Constants.LONG_DELAY_AMOUNT);
+          
+          /*Thread.sleep(Constants.DELAY_AMOUNT);
           m_PopUpPistion.pistonDown();
           Thread.sleep(Constants.DELAY_AMOUNT);
           m_PopUpPistion.pistonUp();
@@ -137,10 +176,7 @@ public class AutonomusCommand extends CommandBase {
           Thread.sleep(Constants.DELAY_AMOUNT);
           m_PopUpPistion.pistonDown();
           Thread.sleep(Constants.DELAY_AMOUNT);
-          m_PopUpPistion.pistonUp();
-          Thread.sleep(Constants.DELAY_AMOUNT);
-          m_PopUpPistion.pistonDown();
-          Thread.sleep(Constants.DELAY_AMOUNT);
+          */
           m_Intake.setIntake(0);
           m_WheelShooter.shooterOff();
           }catch(InterruptedException fail){
@@ -150,7 +186,7 @@ public class AutonomusCommand extends CommandBase {
       }.start();
       //m_PopUpPistion.pistonUp();
       System.out.println("Shoot");
-    }
+    } 
     else if (System.currentTimeMillis()>shoot && System.currentTimeMillis()<initialDriveStop){
       //Fast Drive
       m_DriveTrain.setLeftMotor(Constants.AUTO_SPEED);
@@ -165,7 +201,9 @@ public class AutonomusCommand extends CommandBase {
     }
     else if (System.currentTimeMillis()>driveStop){
       Finsihed = true;
+      m_Compressor.start();
       Constants.TELEOP_DRIVE = true;
+      Constants.TELEOP_INTAKE = true;
     }
   }
 
